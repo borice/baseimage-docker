@@ -1,4 +1,7 @@
-# A minimal Ubuntu base image modified for Docker-friendliness
+# A minimal ~~Ubuntu~~ **Debian Jessie** base image modified for Docker-friendliness
+This is a fork of the [phusion/baseimage](https://github.com/phusion/baseimage-docker) project
+
+**Any references to Ubuntu below should be renamed to Debian Jessie**
 
 [![](https://badge.imagelayers.io/phusion/baseimage:0.9.17.svg)](https://imagelayers.io/?images=phusion/baseimage:latest 'Get your own badge on imagelayers.io')
 

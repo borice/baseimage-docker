@@ -1,5 +1,5 @@
-NAME = phusion/baseimage
-VERSION = 0.9.18
+NAME = borice/base-jessie
+VERSION = 0.9.18a
 
 .PHONY: all build test tag_latest release ssh
 
@@ -24,6 +24,6 @@ ssh:
 	chmod 600 image/services/sshd/keys/insecure_key
 	@ID=$$(docker ps | grep -F "$(NAME):$(VERSION)" | awk '{ print $$1 }') && \
 		if test "$$ID" = ""; then echo "Container is not running."; exit 1; fi && \
-		IP=$$(docker inspect $$ID | grep IPAddr | sed 's/.*: "//; s/".*//') && \
+		IP=$$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" $$ID) && \
 		echo "SSHing into $$IP" && \
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i image/services/sshd/keys/insecure_key root@$$IP

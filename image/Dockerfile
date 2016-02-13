@@ -1,5 +1,8 @@
-FROM ubuntu:14.04
-MAINTAINER Phusion <info@phusion.nl>
+#FROM ubuntu:14.04
+#MAINTAINER Phusion <info@phusion.nl>
+
+FROM debian:jessie
+MAINTAINER Boris Capitanu <borice@hotmail.com>
 
 ADD . /bd_build
 

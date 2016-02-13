@@ -16,14 +16,14 @@ mkdir -p /etc/container_environment
 echo -n no > /etc/container_environment/INITRD
 
 ## Enable Ubuntu Universe and Multiverse.
-sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
-sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
+#sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
+#sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
 apt-get update
 
 ## Fix some issues with APT packages.
 ## See https://github.com/dotcloud/docker/issues/1024
-dpkg-divert --local --rename --add /sbin/initctl
-ln -sf /bin/true /sbin/initctl
+#dpkg-divert --local --rename --add /sbin/initctl
+#ln -sf /bin/true /sbin/initctl
 
 ## Replace the 'ischroot' tool to make it always return true.
 ## Prevent initscripts updates from breaking /dev/shm.
@@ -42,8 +42,13 @@ $minimal_apt_get_install software-properties-common
 apt-get dist-upgrade -y --no-install-recommends
 
 ## Fix locale.
-$minimal_apt_get_install language-pack-en
+#$minimal_apt_get_install language-pack-en
+$minimal_apt_get_install locales
+sed -i 's/^#\s*\(en_US\.UTF-8\s\+UTF-8\)\s*$/\1/g' /etc/locale.gen
 locale-gen en_US
 update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
 echo -n en_US.UTF-8 > /etc/container_environment/LANG
 echo -n en_US.UTF-8 > /etc/container_environment/LC_CTYPE
+
+## Set TERM to something better than 'dumb' when running `docker exec -it ...`
+echo -e "\nexport TERM=xterm\n" >> ~/.bashrc

@@ -1,3 +1,8 @@
+## 0.9.18a (release date: 2016-02-13)
+
+ * Adapted to work with Debian Jessie
+ * Added some community improvements (PR #283, #278, #265 from original repo)
+
 ## 0.9.18 (release date: 2015-12-08)
 
  * The latest OpenSSL updates have been pulled in. This fixes [CVE-2015-3193](https://www.openssl.org/news/secadv/20151203.txt) and a few others. Upgrading is strongly recommended.
